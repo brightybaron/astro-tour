@@ -1,0 +1,118 @@
+---
+const { data } = Astro.props;
+export interface Props {
+  data: any;
+}
+
+const bucketUrl = import.meta.env.SUPABASE_BUCKET;
+---
+
+<>
+  {
+    data && data.length > 0
+      ? data.map((content: any) => (
+          <div class="bg-white shadow-md overflow-hidden">
+            <div class="relative overflow-hidden">
+              <a href={`/trip/${content.slug}`}>
+                <img
+                  src={`${bucketUrl}/${content.images[0].url}`}
+                  alt={`${content.nama} main`}
+                  class="object-cover hover:scale-105 transition-all duration-300"
+                  loading="lazy"
+                />
+              </a>
+              <div class="absolute bottom-0 left-4">
+                <span class="bg-teal-800 text-white px-3 py-1 rounded-sm font-semibold">
+                  Rp. {`${content.harga[0]}.000`}
+                </span>
+              </div>
+            </div>
+
+            <!-- Content -->
+  <div class="p-4">
+    <h3 class="text-xl font-bold mb-3">
+      {content.nama}
+    </h3>
+
+    <div class="flex items-center justify-between">
+      <!-- Rating and Reviews -->
+      <div class="flex items-center text-sm text-slate-700 font-medium gap-2">
+        <div class="flex items-center bg-gray-200 rounded-full px-3 py-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4 mr-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span class="text-sm">{content.itineraries.length > 1
+                      ? `${content.itineraries.length} Days`
+                      : `${content.itineraries.length} Day`}</span>
+        </div>
+        <span class="flex items-center bg-gray-200 rounded-full px-3 py-1">
+          <span>
+            {
+              content.jenistrip === "Private" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 mr-1"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <>
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 mr-1"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <>
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </>
+                </svg>
+              )
+            }
+          </span>
+          {content.jenistrip} Trip
+        </span>
+      </div>
+
+      <a
+        href={`/trip/${content.slug}`}
+        class="flex bg-deep-blue text-white hover:bg-blue-900 hover:scale-105 hover:transition-all hover:duration-300 px-3 py-1 rounded-lg items-center text-sm font-medium"
+      >
+        Details
+      </a>
+    </div>
+  </div>
+          </div>
+        ))
+      : "No Post Found"
+  }
+</>

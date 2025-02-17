@@ -1,0 +1,17 @@
+---
+import Card from "@components/Card.astro";
+import Kard from "@components/Kard.astro";
+import Layout from "@layouts/Layout.astro";
+import { getContent } from "@lib/data.";
+
+const tours = await getContent();
+---
+
+<Layout>
+  <h1 class="sm:text-4xl text-2xl font-bold text-center">Paket Trip</h1>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-6">
+      <Kard data={tours} />
+    </div>
+  </div>
+</Layout>

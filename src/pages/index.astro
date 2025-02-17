@@ -1,0 +1,293 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getContent } from "@lib/data.";
+import Kard from "@components/Kard.astro";
+
+// Hero.astro
+interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  backgroundImages?: string[];
+}
+
+const {
+  title = "Badak Gunung",
+  subtitle = "Temukan pengalaman terbaik dalam layanan kami yang berkualitas",
+  description = "Discover, Book and Enjoy Your Journey!",
+  backgroundImages = [
+    "/hero.jpg",
+    "/bromo1.jpg",
+    "/bromo2.jpeg",
+    "/bromo3.jpg",
+    "/bromo4.png",
+  ],
+} = Astro.props;
+
+const tours = await getContent();
+
+const features = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16">
+      <path fill="#FF6B6B" d="M12 3C7.58 3 4 6.58 4 11c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-3.31 2.69-6 6-6s6 2.69 6 6c0 3.31-2.69 6-6 6z"/>
+      <path fill="#87CEEB" d="M12 5C8.69 5 6 7.69 6 11c0 3.31 2.69 6 6 6s6-2.69 6-6c0-3.31-2.69-6-6-6z"/>
+      <path fill="#FFD700" d="M12 7c-2.21 0-4 1.79-4 4 0 2.21 1.79 4 4 4s4-1.79 4-4c0-2.21-1.79-4-4-4z"/>
+    </svg>`,
+    title: "Save Money",
+    description:
+      "Dapatkan paket liburan yang affordable dengan fasilitas yang beragam",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16">
+      <path fill="#FF6B6B" d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/>
+      <path fill="#FFD700" d="M18 14h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/>
+    </svg>`,
+    title: "Get Help",
+    description:
+      "Liburanmu akan terasa lebih menyenangkan dengan ditemani crew yang ramah dan helpful",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16">
+      <path fill="#4A90E2" d="M20 6h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM9 4h6v2H9V4zm11 15H4V8h16v11z"/>
+      <path fill="#FF6B6B" d="M13 10h-2v3H8v2h3v3h2v-3h3v-2h-3z"/>
+    </svg>`,
+    title: "Stay Safe",
+    description:
+      "Kami pastikan setiap tamu yang berlibur dapat merasakan liburan yang aman dan nyaman",
+  },
+];
+---
+
+<Layout>
+  <section class="relative h-screen w-full">
+    <!-- Background Image -->
+    <!-- <div
+      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+      style={`background-image: url(${backgroundImage})`}
+    >
+      Overlay gelap untuk membuat teks lebih mudah dibaca
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div> -->
+
+    <div
+      class="carousel-container absolute inset-0 w-full h-screen overflow-hidden"
+    >
+      {
+        backgroundImages.map((image: any, index: any) => (
+          <div
+            class={`carousel-slide absolute inset-0 w-full h-screen bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+            style={`background-image: url(${image})`}
+            data-index={index}
+          >
+            <div class="absolute inset-0 bg-black/50" />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Container untuk teks -->
+    <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col justify-center h-full max-w-xl">
+        <div class="space-y-6">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+          >
+            {title}
+          </h1>
+          <p class="text-base md:text-lg text-gray-200">
+            {subtitle}
+          </p>
+          <div
+            class="inline-flex items-center text-base md:text-lg text-gray-300 h-1"
+          >
+            <span id="typed-text" typed-items={description}></span>
+            <span id="cursor" class="animate-pulse">|</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-100 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-2xl font-extrabold text-gray-900 sm:text-4xl">
+            Best Choices
+          </h2>
+          <p class="mt-1 text-gray-500">Check our best trip!</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-6">
+          <Kard data={tours.slice(0, 3)} />
+        </div>
+      </div>
+    </div>
+
+    <section class="py-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2
+          class="text-2xl md:text-4xl font-bold text-center text-gray-800 mb-12"
+        >
+          Why Travel with Badak Gunung?
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            features.map((feature) => (
+              <div class="flex flex-col items-center text-center">
+                <div class="mb-4" set:html={feature.icon} />
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                  {feature.title}
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2
+          class="text-center text-3xl md:text-7xl font-bold text-deep-blue font-sarina -rotate-[2deg]"
+        >
+          Travel with Style!
+        </h2>
+        <div class="mt-8 max-w-7xl flex justify-center mx-auto sm:px-12 px-6">
+          <a
+            href="/trip"
+            class="hover:bg-deep-blue hover:text-white hover:scale-105 font-medium px-4 py-2 rounded transition-all duration-200 inline-flex items-center gap-x-1"
+          >
+            <span class="inline-flex">
+              <svg
+                fill="currentColor"
+                height="20px"
+                width="20px"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 512 512"
+                xml:space="preserve"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"> </g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                </g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <g>
+                      <path
+                        d="M508.645,18.449c-2.929-2.704-7.133-3.51-10.826-2.085L6.715,204.446c-3.541,1.356-6.066,4.515-6.607,8.264 c-0.541,3.75,0.985,7.496,3.995,9.796l152.127,116.747c-0.004,0.116-0.575,0.224-0.575,0.342v83.592 c0,3.851,2.663,7.393,6.061,9.213c1.541,0.827,3.51,1.236,5.199,1.236c2.026,0,4.181-0.593,5.931-1.756l56.12-37.367 l130.369,99.669c1.848,1.413,4.099,2.149,6.365,2.149c1.087,0,2.186-0.169,3.248-0.516c3.27-1.066,5.811-3.672,6.786-6.974 L511.571,29.082C512.698,25.271,511.563,21.148,508.645,18.449z M170.506,321.508c-0.385,0.36-0.7,0.763-1.019,1.163 L31.659,217.272L456.525,54.557L170.506,321.508z M176.552,403.661v-48.454l33.852,25.887L176.552,403.661z M359.996,468.354 l-121.63-93.012c-1.263-1.77-2.975-3.029-4.883-3.733l-47.29-36.163L480.392,60.86L359.996,468.354z"
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+            Get Your Trip!</a
+          >
+        </div>
+      </div>
+    </section>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const typedTextElement = document.getElementById("typed-text");
+    const text = typedTextElement?.getAttribute("typed-items");
+    const cursorElement = document.getElementById("cursor");
+
+    let charIndex = 0;
+    let isDeleting = false;
+    let textToType = "";
+
+    function typeEffect() {
+      if (isDeleting) {
+        // Hapus karakter
+        textToType = text!.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        // Tambah karakter
+        textToType = text!.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      // Update teks yang ditampilkan
+      if (typedTextElement && cursorElement) {
+        typedTextElement.textContent = textToType;
+      }
+      // typedTextElement.textContent = textToType;
+
+      // Tentukan kecepatan mengetik
+      let typeSpeed = isDeleting ? 50 : 50;
+
+      // Logika untuk mengganti arah (mengetik/menghapus)
+      if (!isDeleting && charIndex === text!.length) {
+        // Tunggu sebentar sebelum mulai menghapus
+        setTimeout(() => {
+          isDeleting = true;
+        }, 50);
+        return setTimeout(typeEffect, 1000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        // Tunggu sebentar sebelum mulai mengetik lagi
+        return setTimeout(typeEffect, 500);
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    // Mulai efek mengetik
+    setTimeout(typeEffect, 1000);
+
+    // Carousel logic
+    const slides = document.querySelectorAll(".carousel-slide");
+    const slideCount = slides.length;
+    let currentSlide = 0;
+
+    // Fungsi untuk mengganti slide
+    function nextSlide() {
+      // Fade out slide aktif
+      slides[currentSlide].classList.remove("opacity-100");
+      slides[currentSlide].classList.add("opacity-0");
+
+      // Update indeks slide
+      currentSlide = (currentSlide + 1) % slideCount;
+
+      // Fade in slide berikutnya
+      slides[currentSlide].classList.remove("opacity-0");
+      slides[currentSlide].classList.add("opacity-100");
+    }
+
+    // Ganti slide setiap 5 detik (5000ms)
+    setInterval(nextSlide, 5000);
+  });
+</script>
+
+<style>
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  #cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  .carousel-slide {
+    transition: opacity 1s ease;
+  }
+</style>
