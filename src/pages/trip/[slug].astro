@@ -122,11 +122,16 @@ export const prerender = false;
   </section>
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
-    <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
+    <div class="border border-gray-300 rounded-lg sm:p-6 p-4 space-y-1">
       <h2 class="text-2xl font-semibold mb-2">Deskripsi</h2>
       {
-        content.descriptions.map((text: any) => (
-          <p class="text-gray-800 sm:text-base text-sm">{text.description}</p>
+        content.descriptions.map((text: any, index: number) => (
+          <p
+            class={`text-gray-800 sm:text-base text-sm 
+              ${index === 0 ? "font-medium" : ""}`}
+          >
+            {text.description}
+          </p>
         ))
       }
     </div>
@@ -171,6 +176,10 @@ export const prerender = false;
       <h2 class="text-2xl font-semibold mb-4">Itinerary</h2>
       <div class="space-y-2">
         <Accordion data={content.itineraries} isFaq="" client:load />
+        <p class="text-gray-800 sm:text-sm text-xs text-end italic mt-4">
+          <strong>*</strong> Hanya sebagai acuan dasar, dalam pelaksanaanya menyesuaikan
+          dengan kondisi yang ada.
+        </p>
       </div>
     </div>
   </section>
@@ -233,7 +242,9 @@ export const prerender = false;
                   return (
                     <tr class="hover:bg-sandy-beige/50 text-center">
                       <td class="px-4 py-2 border">{pax}</td>
-                      <td class="px-4 py-2 border">Rp {`${item}.000`}</td>
+                      <td class="px-4 py-2 border">
+                        Rp {`${Number(item).toLocaleString("id-ID")}.000`}
+                      </td>
                     </tr>
                   );
                 })

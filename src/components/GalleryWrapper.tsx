@@ -27,7 +27,7 @@ const GalleryWrapper = ({ images, bucketUrl }: any) => {
         />
       </div>
       <div className="grid grid-cols-1 gap-4">
-        {imageUrls.map((url: any, index: any) => (
+        {imageUrls.slice(1).map((url: any, index: any) => (
           <img
             key={index}
             src={url}

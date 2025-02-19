@@ -23,7 +23,8 @@ const bucketUrl = import.meta.env.SUPABASE_BUCKET;
               </a>
               <div class="absolute bottom-0 left-4">
                 <span class="bg-teal-800 text-white px-3 py-1 rounded-sm font-semibold">
-                  Rp. {`${content.harga[0]}.000`}
+                  Rp. {`${Number(content.harga[0]).toLocaleString("id-ID")}.000`}
+
                 </span>
               </div>
             </div>
