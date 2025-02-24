@@ -133,12 +133,12 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
               loading="lazy"
               height={32}
               width={32}
-              className={`h-12 w-12 rounded-full p-0.5 transition-all duration-300  ${
+              className={`h-10 w-10 rounded-full p-0.5 transition-all duration-300  ${
                 isScrolled ? "sm:bg-white" : ""
               }`}
             />
             <span
-              className={`text-2xl font-bold hover:text-soft-turquoise hover:cursor-pointer after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100 ${
+              className={`text-xl font-bold hover:text-soft-turquoise hover:cursor-pointer after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100 ${
                 isScrolled
                   ? "sm:text-white text-deep-blue"
                   : isMenuOpen
@@ -157,7 +157,7 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
                 <a
                   key={index}
                   href={item.path}
-                  className="px-3 py-2 rounded-md font-semibold text-white hover:text-soft-turquoise after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100 inline-flex items-center gap-x-1"
+                  className="px-3 py-2 rounded-md font-medium text-white hover:text-soft-turquoise after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100 inline-flex items-center gap-x-1"
                 >
                   <span>{item.icon}</span>
                   {item.page}
