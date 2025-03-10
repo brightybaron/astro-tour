@@ -5,7 +5,7 @@ export const getContent = async () => {
   try {
     const result = await prisma.post.findMany({
       orderBy: {
-        createdAt: "asc",
+        nama: "asc",
       },
       include: {
         images: {
