@@ -66,24 +66,50 @@ const Accordion = ({ data, isFaq }: any) => {
           <div
             className={`
                 overflow-hidden transition-all duration-200
-                ${openDays[item.title] ? "max-h-96 px-4 py-3" : "max-h-0"}
+                ${
+                  openDays[item.title]
+                    ? "max-h-96 px-2 sm:px-4 py-3"
+                    : "max-h-0"
+                }
               `}
           >
-            <ul className="space-y-2">
-              {item.items.map((item: any, idx: number) => (
-                <li
-                  key={idx}
-                  className="flex items-center text-slate-700 sm:text-base text-sm"
-                >
-                  <div
-                    className={`w-2 h-2 bg-deep-blue rounded-full mr-1 ${
-                      isFaq || ""
-                    }`}
-                  />
-                  {item.time || null} - {item.details}
-                </li>
-              ))}
-            </ul>
+            {isFaq ? (
+              <ul className="space-y-2">
+                {item.items.map((item: any, idx: number) => (
+                  <li key={idx} className="text-slate-800 sm:text-base text-sm">
+                    {/* <div className="w-2 h-2 bg-deep-blue rounded-full mr-1" /> */}
+                    - {item.details}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <table>
+                <tbody>
+                  {item.items.map((item: any, idx: number) => (
+                    <tr
+                      key={idx}
+                      className="text-slate-700 sm:text-base text-sm space-y-1"
+                    >
+                      {/* <td className="w-2 h-2 bg-deep-blue rounded-full mr-1" /> */}
+                      <td className="flex items-start mr-1 justify-center">
+                        {item.time && <b>{item.time}</b>}
+                      </td>
+                      <td>
+                        {item.details
+                          .split(/(exclude)/gi)
+                          .map((part: string, i: number) =>
+                            part.toLowerCase() === "exclude" ? (
+                              <b key={i}>{part}</b>
+                            ) : (
+                              part
+                            )
+                          )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       ))}

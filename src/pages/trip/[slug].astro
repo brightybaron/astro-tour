@@ -3,6 +3,7 @@ import GalleryWrapper from "@components/GalleryWrapper";
 import Accordion from "@components/Accordion";
 import Layout from "@layouts/Layout.astro";
 import { getContent, getContentBySlug } from "@lib/data.";
+import Fasilitas from "@components/Fasilitas";
 
 export async function getStaticPaths() {
   const posts = await getContent();
@@ -143,7 +144,7 @@ export const prerender = false;
       <ul class="space-y-2">
         {
           content.highlight.map((highlight: any) => (
-            <li class="flex items-start text-sm">
+            <li class="flex items-start text-sm sm:text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -184,13 +185,15 @@ export const prerender = false;
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
+  <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8 sm:block hidden">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
       <h2 class="text-2xl font-semibold mb-4">Fasilitas</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-48 sm:max-h-none overflow-y-auto"
+      >
         {
           content.fasilitas.map((inclusion: any) => (
-            <div class="flex items-center">
+            <div class="flex items-center text-sm sm:text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -220,6 +223,8 @@ export const prerender = false;
       </div>
     </div>
   </section>
+
+  <Fasilitas content={content} client:load />
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
