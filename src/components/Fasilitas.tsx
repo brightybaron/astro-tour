@@ -13,7 +13,10 @@ const Fasilitas = ({ content }: any) => {
           {content.fasilitas
             .slice(currentPage * 6, currentPage * 6 + 6)
             .map((inclusion: any) => (
-              <div className="flex items-center text-sm sm:text-base">
+              <div
+                className="flex items-center text-sm sm:text-base"
+                key={inclusion}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

@@ -5,16 +5,16 @@ import Layout from "@layouts/Layout.astro";
 import { getContent, getContentBySlug } from "@lib/data.";
 import Fasilitas from "@components/Fasilitas";
 
+const { slug } = Astro.params;
 export async function getStaticPaths() {
-  const posts = await getContent();
+  const post = await getContentBySlug(slug);
 
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  // return posts.map((post) => ({
+  //   params: { slug: post.slug },
+  //   props: { post },
+  // }));
 }
 
-const { slug } = Astro.params;
 const post = await getContentBySlug(slug);
 const content: any = post;
 
@@ -30,7 +30,7 @@ const bucketUrl = import.meta.env.SUPABASE_BUCKET;
 export const prerender = false;
 ---
 
-<Layout title={content.nama}>
+<Layout title={content.nama} deskripsi={content.descriptions[0].description}>
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4">
     <h1 class="sm:text-4xl text-2xl font-bold mb-4">{content.nama}</h1>
     <div class="flex flex-wrap gap-4 text-sm text-gray-600">

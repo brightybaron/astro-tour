@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = ({ bgNav }: { bgNav: any }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -152,15 +152,17 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4 uppercase">
+            <div className="ml-auto flex items-center space-x-4 uppercase">
               {listMenu.map((item, index) => (
                 <a
                   key={index}
                   href={item.path}
-                  className="px-3 py-2 rounded-md font-medium text-white hover:text-soft-turquoise after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100 inline-flex items-center gap-x-1"
+                  className="px-3 py-2 rounded-md font-medium text-white hover:text-soft-turquoise inline-flex items-center gap-x-1"
                 >
                   <span>{item.icon}</span>
-                  {item.page}
+                  <span className=" after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100">
+                    {item.page}
+                  </span>
                 </a>
               ))}
             </div>

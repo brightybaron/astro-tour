@@ -60,15 +60,6 @@ const features = [
 
 <Layout>
   <section class="relative h-screen w-full">
-    <!-- Background Image -->
-    <!-- <div
-      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-      style={`background-image: url(${backgroundImage})`}
-    >
-      Overlay gelap untuk membuat teks lebih mudah dibaca
-      <div class="absolute inset-0 bg-black/50"></div>
-    </div> -->
-
     <div
       class="carousel-container absolute inset-0 w-full h-screen overflow-hidden"
     >
@@ -85,7 +76,6 @@ const features = [
       }
     </div>
 
-    <!-- Container untuk teks -->
     <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col justify-center h-full max-w-xl">
         <div class="space-y-6">
@@ -209,43 +199,37 @@ const features = [
     let isDeleting = false;
     let textToType = "";
 
+    // Typing effect
     function typeEffect() {
       if (isDeleting) {
-        // Hapus karakter
         textToType = text!.substring(0, charIndex - 1);
         charIndex--;
       } else {
-        // Tambah karakter
         textToType = text!.substring(0, charIndex + 1);
         charIndex++;
       }
 
-      // Update teks yang ditampilkan
       if (typedTextElement && cursorElement) {
         typedTextElement.textContent = textToType;
       }
-      // typedTextElement.textContent = textToType;
 
-      // Tentukan kecepatan mengetik
       let typeSpeed = isDeleting ? 50 : 50;
 
-      // Logika untuk mengganti arah (mengetik/menghapus)
       if (!isDeleting && charIndex === text!.length) {
-        // Tunggu sebentar sebelum mulai menghapus
         setTimeout(() => {
           isDeleting = true;
         }, 50);
+
         return setTimeout(typeEffect, 1000);
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        // Tunggu sebentar sebelum mulai mengetik lagi
+
         return setTimeout(typeEffect, 500);
       }
 
       setTimeout(typeEffect, typeSpeed);
     }
 
-    // Mulai efek mengetik
     setTimeout(typeEffect, 1000);
 
     // Carousel logic
@@ -253,21 +237,16 @@ const features = [
     const slideCount = slides.length;
     let currentSlide = 0;
 
-    // Fungsi untuk mengganti slide
     function nextSlide() {
-      // Fade out slide aktif
       slides[currentSlide].classList.remove("opacity-100");
       slides[currentSlide].classList.add("opacity-0");
 
-      // Update indeks slide
       currentSlide = (currentSlide + 1) % slideCount;
 
-      // Fade in slide berikutnya
       slides[currentSlide].classList.remove("opacity-0");
       slides[currentSlide].classList.add("opacity-100");
     }
 
-    // Ganti slide setiap 5 detik (5000ms)
     setInterval(nextSlide, 5000);
   });
 </script>

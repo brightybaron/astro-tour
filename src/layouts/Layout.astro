@@ -2,10 +2,22 @@
 import Navbar from "@components/Navbar";
 import "@styles/global.css";
 
+const {
+  title,
+  deskripsi,
+  description = deskripsi ||
+    "Badak Gunung - Menyediakan beragam tempat liburan di Malang dengan paket wisata beragam dan Paket Tour Gunung Bromo",
+  image = "/logo.png",
+  canonical = Astro.url.pathname,
+  keywords = "travel, indonesia, badak gunung, perjalanan, wisata",
+} = Astro.props;
+
 const isHome = Astro.url.pathname === "/" ? true : false;
 
-const { title } = Astro.props;
 const pageTitle = Astro.url.pathname === "/" ? "Home" : title;
+
+const siteUrl = "https://badakgunung.xyz";
+const fullCanonical = `${siteUrl}${canonical}`;
 ---
 
 <!doctype html>
@@ -15,7 +27,37 @@ const pageTitle = Astro.url.pathname === "/" ? "Home" : title;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/*" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
     <title>{pageTitle || title} | Badak Gunung</title>
+    <meta name="title" content={`${pageTitle || title} | Badak Gunung`} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={fullCanonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonical} />
+    <meta
+      property="og:title"
+      content={`${pageTitle || title} | Badak Gunung`}
+    />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={fullCanonical} />
+    <meta
+      property="twitter:title"
+      content={`${pageTitle || title} | Badak Gunung`}
+    />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteUrl}${image}`} />
+
+    <!-- Tambahan Meta Tags -->
+    <meta name="author" content="Badak Gunung" />
+    <meta name="robots" content="index, no-follow" />
   </head>
   <body class="font-jakarta-plus">
     <Navbar bgNav={isHome} client:load />
@@ -38,9 +80,7 @@ const pageTitle = Astro.url.pathname === "/" ? "Home" : title;
         </div>
         <div class="flex flex-col gap-y-2">
           <h3 class="text-lg font-bold underline mb-4">Our Office</h3>
-          <p class="text-sm">
-            Jl. Pasir Raya No.23 PPI Manyar, Gresik, Jawa Timur 61151
-          </p>
+          <p class="text-sm">Pongangan, Manyar, Gresik, Jawa Timur 61151</p>
           <p class="text-sm">Phone: +62 851 5727 6433</p>
           <p class="text-sm">Email: rekayodolan@gmail.com</p>
         </div>
