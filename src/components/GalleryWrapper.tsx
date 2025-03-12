@@ -10,6 +10,13 @@ const GalleryWrapper = ({ images, bucketUrl }: any) => {
   const imageUrls =
     images?.map((img: { url: any }) => `${bucketUrl}/${img.url}`) || [];
 
+  // Find index of first image containing "main"
+  const mainImageIndex = imageUrls.findIndex((url: string) =>
+    url.toLowerCase().includes("main")
+  );
+  // Use -1 check in case no matches are found
+  const indexToUse = mainImageIndex !== -1 ? mainImageIndex : 0;
+
   const handleImageClick = (index: any) => {
     setInitialIndex(index);
     setIsLightboxOpen(true);
@@ -19,7 +26,7 @@ const GalleryWrapper = ({ images, bucketUrl }: any) => {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8 ">
       <div className="lg:col-span-2">
         <img
-          src={imageUrls[0]}
+          src={imageUrls[indexToUse]}
           alt="Main gallery image"
           className="w-full h-96 object-cover object-center rounded-lg cursor-pointer"
           onClick={() => handleImageClick(0)}
