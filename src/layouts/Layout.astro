@@ -16,7 +16,7 @@ const isHome = Astro.url.pathname === "/" ? true : false;
 
 const pageTitle = Astro.url.pathname === "/" ? "Home" : title;
 
-const siteUrl = "https://badakgunung.xyz";
+const siteUrl = Astro.url.origin;
 const fullCanonical = `${siteUrl}${canonical}`;
 ---
 
