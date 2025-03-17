@@ -1,4 +1,6 @@
 ---
+import { IconClock4, IconPeople, IconPerson } from "./Icons";
+
 const { data } = Astro.props;
 export interface Props {
   data: any;
@@ -35,19 +37,7 @@ const bucketUrl = import.meta.env.SUPABASE_BUCKET;
               <div class="flex items-center justify-between">
                 <div class="flex items-center text-sm text-slate-700 font-medium gap-2">
                   <div class="flex items-center bg-gray-200 rounded-full px-3 py-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-4 h-4 mr-1"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
+                    <IconClock4 />
                     <span class="text-sm">
                       {content.itineraries.length > 1
                         ? `${content.itineraries.length} Days`
@@ -64,43 +54,9 @@ const bucketUrl = import.meta.env.SUPABASE_BUCKET;
                   >
                     <span>
                       {content.jenistrip === "Private" ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="w-4 h-4 mr-1"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <>
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                          </>
-                        </svg>
+                        <IconPerson />
                       ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="w-4 h-4 mr-1"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <>
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                          </>
-                        </svg>
+                        <IconPeople />
                       )}
                     </span>
                     {content.jenistrip} Trip

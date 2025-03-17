@@ -1,4 +1,10 @@
 import { useState, useEffect } from "react";
+import {
+  IconCircleHelp,
+  IconFileUser,
+  IconHome,
+  IconPaperPlane,
+} from "@components/Icons";
 
 const Navbar = ({ bgNav }: { bgNav: any }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,89 +33,22 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
     {
       page: "Home",
       path: "/",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-5 h-5"
-        >
-          <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-          <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        </svg>
-      ),
+      icon: <IconHome />,
     },
     {
       page: "Trip",
       path: "/trip",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-5 h-5"
-        >
-          <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
-          <path d="m21.854 2.147-10.94 10.939" />
-        </svg>
-      ),
+      icon: <IconPaperPlane />,
     },
     {
       page: "About",
       path: "/about",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-5 h-5"
-        >
-          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-          <path d="M15 18a3 3 0 1 0-6 0" />
-          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
-          <circle cx="12" cy="13" r="2" />
-        </svg>
-      ),
+      icon: <IconFileUser />,
     },
     {
       page: "FAQ",
       path: "/faq",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-5 h-5"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <path d="M12 17h.01" />
-        </svg>
-      ),
+      icon: <IconCircleHelp />,
     },
   ];
 
@@ -209,12 +148,12 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-white">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+            <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col">
               {listMenu.map((item, index) => (
                 <a
                   key={index}
                   href={item.path}
-                  className="px-3 py-2 rounded-md text-base font-semibold text-deep-blue uppercase inline-flex items-center gap-x-1"
+                  className="px-3 py-2 rounded-md text-base font-semibold text-white uppercase inline-flex items-center gap-x-1 bg-deep-blue"
                 >
                   <span>{item.icon}</span>
                   {item.page}

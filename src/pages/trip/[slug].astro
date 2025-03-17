@@ -3,74 +3,56 @@ import GalleryWrapper from "@components/GalleryWrapper";
 import Accordion from "@components/Accordion";
 import Layout from "@layouts/Layout.astro";
 import { getContent, getContentBySlug } from "@lib/data.";
-import Fasilitas from "@components/Fasilitas";
+import Pagination from "@components/Pagination";
+import {
+  IconMapPinned,
+  IconMapPin,
+  IconClock4,
+  IconPeople,
+  IconPerson,
+  IconCoffee,
+  IconBus,
+  IconChat,
+} from "@components/Icons";
+
+// export async function getStaticPaths() {
+// const posts = await getContent();
+// return posts.map((post: any) => ({
+//   params: { slug: post.slug },
+//   props: { post },
+// }));
+// }
 
 const { slug } = Astro.params;
-export async function getStaticPaths() {
-  const post = await getContentBySlug(slug);
-
-  // return posts.map((post) => ({
-  //   params: { slug: post.slug },
-  //   props: { post },
-  // }));
-}
-
-const post = await getContentBySlug(slug);
+const post = await getContentBySlug(slug as string);
 const content: any = post;
 
 if (!content) {
-  return new Response(null, {
-    status: 404,
-    statusText: "No Post Created",
-  });
+  return Astro.redirect("/404");
 }
 
 const bucketUrl = import.meta.env.SUPABASE_BUCKET;
 
+const head = {
+  deskripsi: content.descriptions[0].description,
+  image: content.images[0].url,
+  canonical: `/trip/${content.slug}`,
+  highlight: content.highlight.join(", "),
+};
+
 export const prerender = false;
 ---
 
-<Layout title={content.nama} deskripsi={content.descriptions[0].description}>
+<Layout title={content.nama} {...head}>
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4">
-    <h1 class="sm:text-4xl text-2xl font-bold mb-4">{content.nama}</h1>
-    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+    <h1 class="sm:text-4xl text-3xl font-bold mb-4">{content.nama}</h1>
+    <div class="flex flex-wrap gap-4 text-sm font-medium text-gray-600">
       <div class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4 mr-1"
-        >
-          <path
-            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-          >
-          </path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
+        <IconMapPin />
         {content.lokasi}
       </div>
       <div class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4 mr-1"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <polyline points="12 6 12 12 16 14"></polyline>
-        </svg>
+        <IconClock4 />
         {
           content.itineraries.length > 1
             ? `${content.itineraries.length} Days`
@@ -78,21 +60,7 @@ export const prerender = false;
         }
       </div>
       <div class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4 mr-1"
-        >
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
+        {content.jenistrip === "Private" ? <IconPerson /> : <IconPeople />}
         {content.jenistrip}
       </div>
     </div>
@@ -100,70 +68,34 @@ export const prerender = false;
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <GalleryWrapper images={content.images} bucketUrl={bucketUrl} client:load />
-    <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
-      <div class="lg:col-span-2">
-        <img
-          src={`${bucketUrl}/${content.images[0].url}`}
-          alt={`${content.name} main`}
-          class="w-full h-[496px] object-cover rounded-lg"
-        />
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        {
-          content.images.map((img: any, index: number) => (
-            <img
-              src={`${bucketUrl}/${img.url}`}
-              alt={`Gallery ${index + 1}`}
-              class="w-full h-28 object-cover rounded-lg"
-            />
-          ))
-        }
-      </div>
-    </div> -->
   </section>
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
-    <div class="border border-gray-300 rounded-lg sm:p-6 p-4 space-y-1">
-      <h2 class="text-2xl font-semibold mb-2">Deskripsi</h2>
-      {
-        content.descriptions.map((text: any, index: number) => (
-          <p
-            class={`text-gray-800 sm:text-base text-sm 
-              ${index === 0 ? "font-medium" : ""}`}
-          >
-            {text.description}
-          </p>
-        ))
-      }
+    <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
+      <h2 class="title-heading">Deskripsi</h2>
+      <article>
+        {
+          content.descriptions.map((text: any, index: number) => (
+            <p
+              class={`text-gray-800 sm:text-base text-sm
+              ${index === 0 ? "font-semibold" : "font-medium"}`}
+            >
+              {text.description}
+            </p>
+          ))
+        }
+      </article>
     </div>
   </section>
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
-      <h2 class="text-2xl font-semibold mb-4">Tour Highlight</h2>
+      <h2 class="title-heading">Tour Highlight</h2>
       <ul class="space-y-2">
         {
           content.highlight.map((highlight: any) => (
             <li class="flex items-start text-sm sm:text-base">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5 mr-1 text-deep-blue flex-shrink-0"
-              >
-                <>
-                  <path d="M10 2v2" />
-                  <path d="M14 2v2" />
-                  <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
-                  <path d="M6 2v2" />
-                </>
-              </svg>
+              <IconCoffee />
               <span>{highlight}</span>
             </li>
           ))
@@ -174,10 +106,35 @@ export const prerender = false;
 
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
-      <h2 class="text-2xl font-semibold mb-4">Itinerary</h2>
+      <h2 class="title-heading">Destinasi</h2>
+      <div
+        class="sm:grid hidden grid-cols-1 md:grid-cols-2 gap-4 max-h-48 sm:max-h-none overflow-y-auto"
+      >
+        {
+          content.destinasi.map((destinasi: any) => (
+            <div class="flex items-center text-sm sm:text-base">
+              <IconMapPinned />
+              <span>{destinasi}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="sm:hidden block">
+        <Pagination
+          content={content.destinasi}
+          contentTypes="destinasi"
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
+    <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
+      <h2 class="title-heading">Itinerary</h2>
       <div class="space-y-2">
         <Accordion data={content.itineraries} isFaq="" client:load />
-        <p class="text-gray-800 sm:text-sm text-xs text-end italic mt-4">
+        <p class="sm:text-sm text-xs text-end italic mt-4">
           <strong>*</strong> Hanya sebagai acuan dasar, dalam pelaksanaanya menyesuaikan
           dengan kondisi yang ada.
         </p>
@@ -185,50 +142,34 @@ export const prerender = false;
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8 sm:block hidden">
+  <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
-      <h2 class="text-2xl font-semibold mb-4">Fasilitas</h2>
+      <h2 class="title-heading">Fasilitas</h2>
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-48 sm:max-h-none overflow-y-auto"
+        class="sm:grid hidden grid-cols-1 md:grid-cols-2 gap-4 max-h-48 sm:max-h-none overflow-y-auto"
       >
         {
           content.fasilitas.map((inclusion: any) => (
             <div class="flex items-center text-sm sm:text-base">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5 mr-1 text-deep-blue"
-              >
-                <>
-                  <path d="M8 6v6" />
-                  <path d="M15 6v6" />
-                  <path d="M2 12h19.6" />
-                  <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" />
-                  <circle cx="7" cy="18" r="2" />
-                  <path d="M9 18h5" />
-                  <circle cx="16" cy="18" r="2" />
-                </>
-              </svg>
+              <IconBus />
               <span>{inclusion}</span>
             </div>
           ))
         }
       </div>
+      <div class="sm:hidden block">
+        <Pagination
+          content={content.fasilitas}
+          contentTypes="fasilitas"
+          client:idle
+        />
+      </div>
     </div>
   </section>
 
-  <Fasilitas content={content} client:load />
-
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
-      <h2 class="text-2xl font-semibold mb-4">Pricelist</h2>
+      <h2 class="title-heading">Pricelist</h2>
       <div class="overflow-x-auto">
         <table class="w-full mb-4">
           <thead>
@@ -256,7 +197,7 @@ export const prerender = false;
             }
           </tbody>
         </table>
-        <p class="text-xs italic">
+        <p class="text-sm italic">
           {
             `*Lebih dari ${content.harga.length + 1} orang, silakan hubungi kami.`
           }
@@ -265,26 +206,37 @@ export const prerender = false;
     </div>
     <div class="flex justify-center mt-8">
       <a
-        class="inline-flex items-center justify-center w-fit mt-2 py-2 px-4 hover:bg-deep-blue bg-orange-jreng/80 text-black hover:text-white border rounded-full font-semibold transition-all duration-300"
-        href={`https://wa.me/6285157276433/?text=Hi%20Badak%20Gunung!%20Saya%20mau%20tanya%20tentang%20${content.nama || ""}`}
+        class="inline-flex items-center justify-center w-fit mt-2 py-2 px-4 bg-orange-jreng/80 text-black hover:text-white hover:bg-deep-blue hover:scale-105 border rounded-full font-semibold transition-all duration-300"
+        href={`https://wa.me/6285157276433/?text=Hi%20Badak%20Gunung!%20Saya%20mau%20tanya%20tentang%20${encodeURIComponent(content.nama || "")}`}
         target="_blank"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-5 h-5 mr-1"
-        >
-          <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
-        </svg>
+        <IconChat />
         Pesan Sekarang
       </a>
     </div>
   </section>
 </Layout>
+
+<style>
+  .title-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+
+  .title-heading::after {
+    content: "";
+    display: block;
+    border-bottom: 3px solid #1b365d;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  .title-heading::before {
+    content: "";
+    display: block;
+    border-bottom: 3px solid #1b365d;
+    margin-right: 1rem;
+  }
+</style>

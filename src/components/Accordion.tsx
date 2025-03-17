@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IconChevronDown, IconChevronUp } from "./Icons";
 
 const Accordion = ({ data, isFaq }: any) => {
   const [openDays, setOpenDays] = useState<{ [key: string]: boolean }>({});
@@ -31,37 +32,7 @@ const Accordion = ({ data, isFaq }: any) => {
               </span>
               <span className="ml-2  font-medium">{item.title}</span>
             </div>
-            {openDays[item.title] ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4 text-gray-600"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4 text-gray-600"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            )}
+            {openDays[item.title] ? <IconChevronDown /> : <IconChevronUp />}
           </button>
           <div
             className={`

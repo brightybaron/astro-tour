@@ -23,24 +23,24 @@ const GalleryWrapper = ({ images, bucketUrl }: any) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8 ">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
       <div className="lg:col-span-2">
         <img
           src={imageUrls[indexToUse]}
           alt="Main gallery image"
           className="w-full h-96 object-cover object-center rounded-lg cursor-pointer"
-          onClick={() => handleImageClick(0)}
+          onClick={() => handleImageClick(indexToUse)}
           loading="lazy"
         />
       </div>
       <div className="grid sm:grid-cols-1 grid-cols-none sm:grid-flow-row grid-flow-col auto-cols-[33.3%] sm:gap-4 gap-2 max-h-96 overflow-scroll">
-        {imageUrls.slice(1).map((url: any, index: any) => (
+        {imageUrls.map((url: any, index: any) => (
           <img
             key={index}
             src={url}
             alt={`Gallery image ${index + 1}`}
             className="w-full h-full sm:aspect-auto aspect-square sm:h-28 object-cover rounded-md cursor-pointer"
-            onClick={() => handleImageClick(index + 1)}
+            onClick={() => handleImageClick(index)}
             loading="lazy"
           />
         ))}

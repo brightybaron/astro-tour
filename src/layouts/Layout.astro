@@ -9,7 +9,8 @@ const {
     "Badak Gunung - Menyediakan beragam tempat liburan di Malang dengan paket wisata beragam dan Paket Tour Gunung Bromo",
   image = "/logo.png",
   canonical = Astro.url.pathname,
-  keywords = "travel, indonesia, badak gunung, perjalanan, wisata",
+  keywords = "bromo, jawa timur, travel, indonesia, badak gunung, perjalanan, wisata, open trip, private trip, malang",
+  highlight,
 } = Astro.props;
 
 const isHome = Astro.url.pathname === "/" ? true : false;
@@ -32,7 +33,7 @@ const fullCanonical = `${siteUrl}${canonical}`;
     <title>{pageTitle || title} | Badak Gunung</title>
     <meta name="title" content={`${pageTitle || title} | Badak Gunung`} />
     <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
+    <meta name="keywords" content={`${keywords}, ${highlight}`} />
     <link rel="canonical" href={fullCanonical} />
 
     <!-- Open Graph / Facebook -->
