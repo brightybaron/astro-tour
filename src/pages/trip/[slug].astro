@@ -73,7 +73,7 @@ export const prerender = false;
   <section class="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 mt-8">
     <div class="border border-gray-300 rounded-lg sm:p-6 p-4">
       <h2 class="title-heading">Deskripsi</h2>
-      <article>
+      <article class="space-y-2">
         {
           content.descriptions.map((text: any, index: number) => (
             <p
@@ -188,7 +188,7 @@ export const prerender = false;
                   return (
                     <tr class="hover:bg-sandy-beige/50 text-center">
                       <td class="px-4 py-2 border">{pax}</td>
-                      <td class="px-4 py-2 border">
+                      <td class="px-4 py-2 border font-medium">
                         Rp {`${Number(item).toLocaleString("id-ID")}.000`}
                       </td>
                     </tr>
@@ -197,7 +197,7 @@ export const prerender = false;
             }
           </tbody>
         </table>
-        <p class="text-sm italic">
+        <p class="sm:text-sm text-xs italic">
           {
             `*Lebih dari ${content.harga.length + 1} orang, silakan hubungi kami.`
           }
@@ -206,7 +206,7 @@ export const prerender = false;
     </div>
     <div class="flex justify-center mt-8">
       <a
-        class="inline-flex items-center justify-center w-fit mt-2 py-2 px-4 bg-orange-jreng/80 text-black hover:text-white hover:bg-deep-blue hover:scale-105 border rounded-full font-semibold transition-all duration-300"
+        class="inline-flex gap-x-1 items-center justify-center w-fit mt-2 py-2 px-4 bg-orange-jreng/80 text-black hover:text-white hover:bg-deep-blue hover:scale-105 border rounded-full font-semibold transition-all duration-300"
         href={`https://wa.me/6285157276433/?text=Hi%20Badak%20Gunung!%20Saya%20mau%20tanya%20tentang%20${encodeURIComponent(content.nama || "")}`}
         target="_blank"
       >

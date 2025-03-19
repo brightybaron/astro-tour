@@ -70,7 +70,7 @@ const ImageLightbox = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center h-screen w-full">
       {/* Close button */}
       <button
         onClick={onClose}
@@ -83,9 +83,9 @@ const ImageLightbox = ({
           viewBox="0 0 24 24"
           fill="none"
           stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="w-8 h-8"
         >
           <path d="M18 6 6 18" />
@@ -98,18 +98,18 @@ const ImageLightbox = ({
         <>
           <button
             onClick={handlePrevious}
-            className="absolute left-4 text-white hover:text-gray-300 z-50"
+            className="absolute sm:left-8 left-4 text-white sm:bg-gray-800 bg-transparent hover:text-gray-300 z-50 hover:scale-105 hover:bg-gray-600 rounded-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24 "
               fill="none"
               stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="w-8 h-8"
             >
               <path d="m15 18-6-6 6-6" />
@@ -117,18 +117,18 @@ const ImageLightbox = ({
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-4 text-white hover:text-gray-300 z-50"
+            className="absolute sm:right-8 right-4 text-white sm:bg-gray-800 bg-transparent hover:text-gray-300 z-50 hover:scale-105 hover:bg-gray-600 rounded-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="48"
+              height="48"
               viewBox="0 0 24 24"
               fill="none"
               stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="w-8 h-8"
             >
               <path d="m9 18 6-6-6-6" />
@@ -150,9 +150,9 @@ const ImageLightbox = ({
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="w-6 h-6 text-white"
           >
             <circle cx="11" cy="11" r="8" />
@@ -171,9 +171,9 @@ const ImageLightbox = ({
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="w-6 h-6 text-white"
           >
             <circle cx="11" cy="11" r="8" />
@@ -186,14 +186,14 @@ const ImageLightbox = ({
 
       {/* Image container */}
       <div
-        className="h-full w-full overflow-auto cursor-grab active:cursor-grabbing"
+        className="h-screen w-full overflow-auto cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
         <div
-          className="h-screen min-w-full flex items-center justify-center transition-transform duration-200"
+          className="h-screen min-w-full flex items-center justify-center transition-transform duration-200 p-4"
           style={{
             transform: `scale(${scale}) translateX(${scrollLeft}px)`,
           }}

@@ -223,7 +223,7 @@ export const IconChat = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="w-5 h-5 mr-1"
+    className="w-5 h-5"
   >
     <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
   </svg>
@@ -304,6 +304,77 @@ export const IconCircleHelp = () => (
   </svg>
 );
 
+export const IconMapPinHouse = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-5 h-5"
+  >
+    <path d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"></path>
+    <path d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"></path>
+    <path d="M18 22v-3"></path>
+    <circle cx="10" cy="10" r="3"></circle>
+  </svg>
+);
+
+export const IconMail = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-5 h-5"
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+  </svg>
+);
+
+export const IconHamburger = () => (
+  <svg
+    className="h-6 w-6"
+    stroke="currentColor"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+);
+
+export const IconCross = () => (
+  <svg
+                className="h-6 w-6"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M6 18L18 6M6 6l12 12"
+    />
+    </svg>
+);
+
 export const Icons = {
   IconMapPinned,
   IconMapPin,
@@ -321,6 +392,10 @@ export const Icons = {
   IconPaperPlane,
   IconFileUser,
   IconCircleHelp,
+  IconMapPinHouse,
+  IconMail,
+  IconHamburger,
+  IconCross,
 };
 
 export default Icons;

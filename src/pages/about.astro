@@ -1,4 +1,5 @@
 ---
+import { IconChat, IconMail, IconMapPinHouse } from "@components/Icons";
 import Layout from "@layouts/Layout.astro";
 ---
 
@@ -26,51 +27,30 @@ import Layout from "@layouts/Layout.astro";
       <div class="col-span-1">
         <p class="text-2xl underline font-semibold mb-2">Our Office</p>
         <p class="text-xl font-bold">Gresik</p>
-        <table
+        <ul class="my-4 ml-4 space-y-2">
+          <li class="flex items-center gap-x-2">
+            <IconMapPinHouse /> Pongangan, Manyar, Gresik
+          </li>
+          <li class="flex items-center gap-x-2">
+            <IconChat /> 0851 5727 6433
+          </li>
+          <li class="flex items-center gap-x-2">
+            <IconMail /> rekayodolan@gmail.com
+          </li>
+        </ul>
+        <!-- <table
           class="table-fixed border-separate border-spacing-x-2 border-spacing-y-2 border-gray-300 my-4"
         >
           <tbody>
             <tr>
               <td>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                >
-                  <path
-                    d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"
-                  ></path>
-                  <path
-                    d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"
-                  ></path>
-                  <path d="M18 22v-3"></path><circle cx="10" cy="10" r="3"
-                  ></circle>
-                </svg>
+                <IconMapPinHouse />
               </td>
               <td class="text-sm">Pongangan, Manyar, Gresik 61151</td>
             </tr>
             <tr>
               <td>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                  ><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg
-                >
+                <IconChat />
               </td>
               <td>
                 <a
@@ -84,25 +64,12 @@ import Layout from "@layouts/Layout.astro";
             </tr>
             <tr>
               <td>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                  ><rect width="20" height="16" x="2" y="4" rx="2"></rect><path
-                    d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg
-                >
+                <IconMail />
               </td>
               <td class="text-sm">rekayodolan@gmail.com</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
       <div class="col-span-2">
         <iframe

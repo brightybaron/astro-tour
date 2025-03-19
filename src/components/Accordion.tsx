@@ -47,22 +47,24 @@ const Accordion = ({ data, isFaq }: any) => {
             {isFaq ? (
               <ul className="space-y-2">
                 {item.items.map((item: any, idx: number) => (
-                  <li key={idx} className="text-slate-800 sm:text-base text-sm">
-                    {/* <div className="w-2 h-2 bg-deep-blue rounded-full mr-1" /> */}
-                    - {item.details}
+                  <li
+                    key={idx}
+                    className="text-slate-800 sm:text-base text-sm list-disc list-inside"
+                  >
+                    {item.details}
                   </li>
                 ))}
               </ul>
             ) : (
-              <table>
+              <table className="w-full">
                 <tbody>
                   {item.items.map((item: any, idx: number) => (
                     <tr
                       key={idx}
-                      className="text-slate-700 sm:text-base text-sm space-y-1"
+                      className="flex text-slate-700 sm:text-base text-sm mb-2 last:mb-0"
                     >
                       {/* <td className="w-2 h-2 bg-deep-blue rounded-full mr-1" /> */}
-                      <td className="flex items-start mr-1 justify-center">
+                      <td className="flex mr-1 justify-center min-w-13">
                         {item.time && <b>{item.time}</b>}
                       </td>
                       <td>

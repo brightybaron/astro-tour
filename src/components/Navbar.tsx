@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import {
   IconCircleHelp,
+  IconCross,
   IconFileUser,
+  IconHamburger,
   IconHome,
   IconPaperPlane,
 } from "@components/Icons";
 
-const Navbar = ({ bgNav }: { bgNav: any }) => {
+const Navbar = ({
+  bgNav,
+  currentPath,
+}: {
+  bgNav: any;
+  currentPath: string;
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -52,6 +60,21 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
     },
   ];
 
+  const isActive = (path: string) => {
+    if (path === "/" && currentPath === "/") return true;
+    if (path !== "/" && currentPath.startsWith(path)) return true;
+    return false;
+  };
+
+  const handleMenuClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    isItemActive: boolean
+  ) => {
+    if (isItemActive) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -69,7 +92,6 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
             <img
               src="/logo.png"
               alt="logo-icon"
-              loading="lazy"
               height={32}
               width={32}
               className={`h-10 w-10 rounded-full p-0.5 transition-all duration-300  ${
@@ -96,10 +118,21 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
                 <a
                   key={index}
                   href={item.path}
-                  className="px-3 py-2 rounded-md font-medium text-white hover:text-soft-turquoise inline-flex items-center gap-x-1"
+                  // onClick={(e) => handleMenuClick(e, isActive(item.path))}
+                  className={`px-3 py-2 rounded-md font-medium inline-flex items-center gap-x-1 ${
+                    isActive(item.path)
+                      ? "text-soft-turquoise hover:cursor-not-allowed"
+                      : "hover:text-soft-turquoise text-white"
+                  }`}
                 >
                   <span>{item.icon}</span>
-                  <span className=" after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 after:scale-x-0 after:origin-center hover:after:scale-x-100">
+                  <span
+                    className={`after:content-[''] after:block after:border-b-2 after:transition-all after:duration-300 ${
+                      isActive(item.path)
+                        ? "after:scale-x-100"
+                        : "after:scale-x-0 after:origin-center hover:after:scale-x-100"
+                    }`}
+                  >
                     {item.page}
                   </span>
                 </a>
@@ -119,28 +152,7 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
                   : "text-white"
               }`}
             >
-              <svg
-                className="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                {isMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
+              {isMenuOpen ? <IconCross /> : <IconHamburger />}
             </button>
           </div>
         </div>
@@ -153,7 +165,12 @@ const Navbar = ({ bgNav }: { bgNav: any }) => {
                 <a
                   key={index}
                   href={item.path}
-                  className="px-3 py-2 rounded-md text-base font-semibold text-white uppercase inline-flex items-center gap-x-1 bg-deep-blue"
+                  // onClick={(e) => handleMenuClick(e, isActive(item.path))}
+                  className={`px-3 py-2 rounded-md text-base font-semibold  uppercase inline-flex items-center gap-x-1 bg-deep-blue ${
+                    isActive(item.path)
+                      ? "bg-soft-turquoise text-black hover:cursor-not-allowed"
+                      : "text-white"
+                  }`}
                 >
                   <span>{item.icon}</span>
                   {item.page}

@@ -2,22 +2,25 @@
 import Navbar from "@components/Navbar";
 import "@styles/global.css";
 
+const currentPath = Astro.url.pathname;
+
+const isHome = currentPath === "/" ? true : false;
+
 const {
   title,
   deskripsi,
   description = deskripsi ||
     "Badak Gunung - Menyediakan beragam tempat liburan di Malang dengan paket wisata beragam dan Paket Tour Gunung Bromo",
   image = "/logo.png",
-  canonical = Astro.url.pathname,
+  canonical = currentPath,
   keywords = "bromo, jawa timur, travel, indonesia, badak gunung, perjalanan, wisata, open trip, private trip, malang",
   highlight,
 } = Astro.props;
 
-const isHome = Astro.url.pathname === "/" ? true : false;
-
-const pageTitle = Astro.url.pathname === "/" ? "Home" : title;
+const pageTitle = currentPath === "/" ? "Home" : title;
 
 const siteUrl = Astro.url.origin;
+
 const fullCanonical = `${siteUrl}${canonical}`;
 ---
 
@@ -61,7 +64,7 @@ const fullCanonical = `${siteUrl}${canonical}`;
     <meta name="robots" content="index, no-follow" />
   </head>
   <body class="font-jakarta-plus">
-    <Navbar bgNav={isHome} client:load />
+    <Navbar bgNav={isHome} currentPath={currentPath} client:load />
     <div class={isHome ? "mt-0" : "sm:mt-26 mt-18"}></div>
     <slot />
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
