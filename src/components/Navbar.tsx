@@ -121,7 +121,7 @@ const Navbar = ({
                   // onClick={(e) => handleMenuClick(e, isActive(item.path))}
                   className={`px-3 py-2 rounded-md font-medium inline-flex items-center gap-x-1 ${
                     isActive(item.path)
-                      ? "text-soft-turquoise hover:cursor-not-allowed"
+                      ? "text-soft-turquoise"
                       : "hover:text-soft-turquoise text-white"
                   }`}
                 >
@@ -168,7 +168,7 @@ const Navbar = ({
                   // onClick={(e) => handleMenuClick(e, isActive(item.path))}
                   className={`px-3 py-2 rounded-md text-base font-semibold  uppercase inline-flex items-center gap-x-1 bg-deep-blue ${
                     isActive(item.path)
-                      ? "bg-soft-turquoise text-black hover:cursor-not-allowed"
+                      ? "bg-soft-turquoise text-black"
                       : "text-white"
                   }`}
                 >
